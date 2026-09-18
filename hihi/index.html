@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Gửi em...</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffe6e6;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+
+        .screen.active {
+            display: flex;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            color: #ff4d4d;
+            font-size: 24px;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+
+        p {
+            color: #555;
+            font-size: 16px;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .image {
+            width: 180px;
+            height: 180px;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            width: 100%;
+        }
+
+        button {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.1s;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        #btnYes {
+            background-color: #ff4d4d;
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 77, 77, 0.4);
+            flex: 1;
+            max-width: 160px;
+        }
+
+        #btnYes:active {
+            transform: scale(0.95);
+        }
+
+        #btnNo {
+            background-color: #e0e0e0;
+            color: #555;
+            flex: 1;
+            max-width: 160px;
+            z-index: 999;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            width: 100%;
+        }
+
+        .opt-btn {
+            background-color: white;
+            color: #ff4d4d;
+            border: 2px solid #ff4d4d;
+            padding: 15px;
+            border-radius: 15px;
+            font-size: 16px;
+            width: 100%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .opt-btn:active {
+            background-color: #ff4d4d;
+            color: white;
+        }
+
+        .small-text {
+            font-size: 14px;
+            color: #888;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MÀN HÌNH 0: Mở đầu -->
+    <div id="screen0" class="screen active">
+        <!-- Ảnh con mèo lấp ló/tò mò -->
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvHqGsy4K7cHt6lyZYknvhZSEoREk3XrHFlRrcXmUg06-T6L6tQD9ibqP1&s=10" alt="peek cat" class="image">
+        <h1>Chào công chúa bé nhỏ... 👋</h1>
+        <p>Hôm nay anh có một điều rất quan trọng muốn nói với em.</p>
+        <p>Em có sẵn sàng nghe không?</p>
+        <div class="buttons">
+            <button id="btnStart" onclick="document.getElementById('screen0').classList.remove('active'); document.getElementById('screen1').classList.add('active');" style="background-color: #ff4d4d; color: white; box-shadow: 0 4px 15px rgba(255, 77, 77, 0.4); width: 100%; max-width: 250px;">Nghe thử xem sao 🤔</button>
+        </div>
+    </div>
+
+    <!-- MÀN HÌNH 1: Xin lỗi -->
+    <div id="screen1" class="screen">
+        <!-- Ảnh con mèo khóc -->
+        <img src="https://cdn-media.sforum.vn/storage/app/media/quynh/meme-meo-khoc-18.jpg" alt="sad cat" class="image">
+        <h1>Anh biết mình vô tâm quá...</h1>
+        <p>Thời gian qua anh vụng về, chưa thể hiện tình cảm với em nhiều, vô tình làm em thấy buồn và không có cảm giác được yêu thương. Anh nhận ra sự thiếu sót của mình rồi. Cho anh xin lỗi em thật nhiều nhé! 🥺</p>
+        <p>Cho anh một cơ hội bù đắp bằng một buổi hẹn hò tối nay được không?</p>
+        <div class="buttons">
+            <button id="btnYes">Dạ, em đồng ý! 💖</button>
+            <div id="btnNoWrapper" style="display:inline-block; width:160px; height:45px;">
+                <button id="btnNo" style="width: 100%;">Chưa thèm tha lỗi! 😤</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MÀN HÌNH 2: Chọn món -->
+    <div id="screen2" class="screen">
+        <!-- Ảnh con mèo vui vẻ -->
+        <img src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/482552PQR/anh-mo-ta.png" alt="happy cat" class="image">
+        <h1>Yehhh! Cảm ơn công chúa! 🎉</h1>
+        <p>Thế tối nay em muốn anh đưa đi đâu nào?</p>
+        <div class="options">
+            <button class="opt-btn" onclick="chotDon('Đi ăn 🍲')">Đi ăn 🍲</button>
+            <button class="opt-btn" onclick="chotDon('Đi karaoke hú hét 🎤')">Đi karaoke hú hét 🎤</button>
+            <button class="opt-btn" onclick="chotDon('Đi cafe lượn phố 🧋')">Đi cafe lượn phố 🧋</button>
+            <button class="opt-btn" onclick="chotDon('Đi làm lành chữa tình 🐧')">Đi làm lành chữa tình 🐧</button>
+            <button class="opt-btn" onclick="chotDon('Để anh tự quyết định 😎')">Để anh tự quyết định 😎</button>
+        </div>
+    </div>
+
+    <!-- MÀN HÌNH 3: Chốt đơn -->
+    <div id="screen3" class="screen">
+        <!-- Ảnh con mèo hôn nhau -->
+        <img src="https://avatarcute.edu.vn/wp-content/uploads/2026/09/meme-hun-10.webp" alt="love cat" class="image">
+        <h1>Chốt đơn! 🥰</h1>
+        <p id="resultText">Lựa chọn tuyệt vời!</p>
+        <p>Chuẩn bị lên đồ nhé, tối anh qua đón công chúa!</p>
+        <p class="small-text">Yêu em nhiều ❤️</p>
+    </div>
+
+    <script>
+        const btnStart = document.getElementById('btnStart');
+        const btnNo = document.getElementById('btnNo');
+        const btnYes = document.getElementById('btnYes');
+        const screen0 = document.getElementById('screen0');
+        const screen1 = document.getElementById('screen1');
+        const screen2 = document.getElementById('screen2');
+        const screen3 = document.getElementById('screen3');
+        const resultText = document.getElementById('resultText');
+
+        // Đã chuyển sự kiện click của nút Nghe thử sang dạng inline (onclick) trên thẻ HTML để đảm bảo luôn hoạt động
+
+        let hoverCount = 0;
+        
+        // Tạo sẵn ảnh mèo giận dữ (ẩn)
+        const angryCat = document.createElement('img');
+        angryCat.src = "https://theselfishmeme.co.uk/wp-content/uploads/2025/11/meme-meo-gian-doi-9.webp";
+        angryCat.style.position = "fixed";
+        angryCat.style.width = "70px";
+        angryCat.style.display = "none";
+        angryCat.style.pointerEvents = "none";
+        angryCat.style.zIndex = "1000";
+        document.body.appendChild(angryCat);
+
+        // Hàm di chuyển nút KHÔNG
+        function moveButton() {
+            hoverCount++;
+            
+            // Lấy kích thước của cửa sổ
+            const maxX = window.innerWidth - btnNo.offsetWidth;
+            const maxY = window.innerHeight - btnNo.offsetHeight;
+            
+            // Random vị trí mới
+            const randomX = Math.floor(Math.random() * maxX);
+            const randomY = Math.floor(Math.random() * maxY);
+            
+            // Đặt lại vị trí
+            btnNo.style.position = 'fixed';
+            btnNo.style.left = randomX + 'px';
+            btnNo.style.top = randomY + 'px';
+            
+            // Hiện ảnh mèo giận dữ nếu hover/chạm quá 3 lần
+            if (hoverCount >= 3) {
+                angryCat.style.display = "block";
+                angryCat.style.left = (randomX + 20) + 'px';
+                // Căn mèo lên trên hoặc xuống dưới nút để không bị văng ra ngoài
+                if (randomY > 80) {
+                    angryCat.style.top = (randomY - 70) + 'px';
+                } else {
+                    angryCat.style.top = (randomY + btnNo.offsetHeight) + 'px';
+                }
+            }
+        }
+
+        // Hỗ trợ cả thao tác lướt/chạm trên điện thoại và chuột trên máy tính
+        btnNo.addEventListener('mouseenter', moveButton);
+        btnNo.addEventListener('touchstart', function(e) {
+            e.preventDefault(); // Ngăn chặn thao tác chạm
+            moveButton();
+        });
+
+        // Xử lý khi nhấn nút CÓ
+        btnYes.addEventListener('click', function() {
+            screen1.classList.remove('active');
+            screen2.classList.add('active');
+            angryCat.style.display = 'none';
+        });
+
+        // Xử lý khi chọn món
+        function chotDon(luaChon) {
+            if (luaChon === 'Để anh tự quyết định 😎') {
+                resultText.innerHTML = "Okela, cứ để anh lo nha!";
+            } else {
+                resultText.innerHTML = "Tuyệt vời, mình sẽ " + luaChon.toLowerCase() + "!";
+            }
+            screen2.classList.remove('active');
+            screen3.classList.add('active');
+
+           
+            const yourEmail = "ndha1115@gmail.com"; 
+            
+            fetch("https://formsubmit.co/ajax/" + yourEmail, {
+                method: "POST",
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify({
+                    "Thông Báo": "Ting ting! Công chúa đã chọn: " + luaChon
+                })
+            })
+            .then(response => console.log("Gửi mail thành công"))
+            .catch(error => console.log("Lỗi: ", error));
+        }
+    </script>
+</body>
+</html>
+
